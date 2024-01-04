@@ -18,11 +18,12 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
     paddingTop: 50,
   },
   heading: {
     fontSize: 20,
     textAlign: "center",
+    marginTop: 40,
   },
 });

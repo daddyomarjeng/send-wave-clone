@@ -9,6 +9,13 @@ import {
 import React, { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 
+const NumberPad = ({ number, ...rest }) => {
+  return (
+    <TouchableOpacity style={styles.numPad} {...rest}>
+      <Text style={styles.numPadText}>{number}</Text>
+    </TouchableOpacity>
+  );
+};
 const PhoneInput = () => {
   const [phone, setPhone] = useState("");
   const [showBlinker, setShowBlinker] = useState(true);
@@ -23,19 +30,46 @@ const PhoneInput = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.left}>
-        <Image source={require("../assets/gambia.png")} style={styles.image} />
-        <Text style={styles.text}>+220</Text>
-        <Ionicons name="chevron-down" size={20} />
-      </TouchableOpacity>
-      <View style={styles.right}>
-        <Text
-          style={[styles.text, { color: phone ? "#111" : "#ccc" }]}
-          placeholder="phone number"
-        >
-          {phone || "XXX XXX X"}
-        </Text>
-        {showBlinker && <View style={styles.blinker} />}
+      <View style={styles.top}>
+        <TouchableOpacity style={styles.left}>
+          <Image
+            source={require("../assets/gambia.png")}
+            style={styles.image}
+          />
+          <Text style={styles.text}>+220</Text>
+          <Ionicons name="chevron-down" size={20} />
+        </TouchableOpacity>
+        <View style={styles.right}>
+          <Text
+            style={[styles.text, { color: phone ? "#111" : "#ccc" }]}
+            placeholder="phone number"
+          >
+            {phone || "XXX XXXX"}
+          </Text>
+          {showBlinker && <View style={styles.blinker} />}
+        </View>
+      </View>
+      <View style={styles.bottom}>
+        <View style={styles.row}>
+          <NumberPad number={1} />
+          <NumberPad number={2} />
+          <NumberPad number={3} />
+        </View>
+        <View style={styles.row}>
+          <NumberPad number={4} />
+          <NumberPad number={5} />
+          <NumberPad number={6} />
+        </View>
+        <View style={styles.row}>
+          <NumberPad number={7} />
+          <NumberPad number={8} />
+          <NumberPad number={9} />
+        </View>
+        <View style={styles.row}>
+          <NumberPad number={""} />
+          <NumberPad number={0} />
+          <NumberPad number={""} />
+        </View>
       </View>
     </View>
   );
@@ -45,6 +79,9 @@ export default PhoneInput;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  top: {
     flexDirection: "row",
     alignItems: "flex-end",
     gap: 10,
@@ -68,6 +105,7 @@ const styles = StyleSheet.create({
   },
   text: {
     // fonts
+    fontSize: 22,
   },
   image: {
     width: 25,
@@ -76,5 +114,22 @@ const styles = StyleSheet.create({
   blinker: {
     width: 2,
     backgroundColor: "lightblue",
+  },
+  bottom: {
+    flex: 1,
+    justifyContent: "flex-end",
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  numPad: {
+    padding: 30,
+  },
+  numPadText: {
+    fontSize: 28,
+    color: "#777",
+    fontWeight: "bold",
   },
 });
