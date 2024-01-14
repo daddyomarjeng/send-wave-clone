@@ -1,9 +1,12 @@
 import {
   Image,
+  Modal,
+  Pressable,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
@@ -16,11 +19,12 @@ const NumberPad = ({ number, ...rest }) => {
     </TouchableOpacity>
   );
 };
-const PhoneInput = () => {
-  const [phone, setPhone] = useState("");
+const PhoneInput = ({ phone, setPhone }) => {
   const [showBlinker, setShowBlinker] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const handleChange = (input) => {
+    if (phone?.length >= 7 && input !== "-1") return;
     let val;
     if (input === "-1") {
       if (phone?.length <= 0 || !phone) {
@@ -48,7 +52,10 @@ const PhoneInput = () => {
   return (
     <View style={styles.container}>
       <View style={styles.top}>
-        <TouchableOpacity style={styles.left}>
+        <TouchableOpacity
+          style={styles.left}
+          onPress={() => setShowModal(true)}
+        >
           <Image
             source={require("../assets/gambia.png")}
             style={styles.image}
@@ -91,6 +98,25 @@ const PhoneInput = () => {
           />
         </View>
       </View>
+
+      <Modal transparent visible={showModal}>
+        <TouchableWithoutFeedback onPress={() => setShowModal(false)}>
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <Pressable style={styles.row}>
+                <Image
+                  style={styles.image}
+                  source={require("../assets/gambia.png")}
+                />
+                <Text style={styles.modalText}>
+                  Gambia<Text style={styles.modalTextSmall}>+220</Text>
+                </Text>
+                <View style={styles.radio} />
+              </Pressable>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
     </View>
   );
 };
@@ -128,8 +154,8 @@ const styles = StyleSheet.create({
     fontSize: 22,
   },
   image: {
-    width: 25,
-    height: 25,
+    width: 20,
+    height: 20,
   },
   blinker: {
     width: 2,
@@ -154,4 +180,27 @@ const styles = StyleSheet.create({
     color: "#777",
     fontWeight: "bold",
   },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.5)",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  modalContent: {
+    backgroundColor: "#fff",
+    width: "90%",
+    padding: 15,
+    borderRadius: 10,
+  },
+  radio: {
+    height: 15,
+    width: 15,
+    borderRadius: 10,
+    borderWidth: 1,
+  },
+  modalText: {
+    fontSize: 16,
+    textAlign: "left",
+  },
+  modalTextSmall: {},
 });
