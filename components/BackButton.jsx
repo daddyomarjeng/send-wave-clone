@@ -6,7 +6,7 @@ const BackButton = () => {
   return (
     <Ionicons
       name="arrow-back-outline"
-      size={40}
+      size={35}
       style={styles.button}
       onPress={() => Alert.alert("Back")}
     />
