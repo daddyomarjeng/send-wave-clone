@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { COUNTRIES } from "../constant/data";
 
 const NumberPad = ({ number, ...rest }) => {
   return (
@@ -22,6 +23,7 @@ const NumberPad = ({ number, ...rest }) => {
 const PhoneInput = ({ phone, setPhone }) => {
   const [showBlinker, setShowBlinker] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
 
   const handleChange = (input) => {
     if (phone?.length >= 7 && input !== "-1") return;
@@ -40,6 +42,10 @@ const PhoneInput = ({ phone, setPhone }) => {
 
     setPhone(val);
   };
+  const handleCountrySelect = (country) => {
+    setSelectedCountry(country);
+    setShowModal(false);
+  };
 
   useEffect(() => {
     // Change the state every second or the time given by User.
@@ -56,11 +62,8 @@ const PhoneInput = ({ phone, setPhone }) => {
           style={styles.left}
           onPress={() => setShowModal(true)}
         >
-          <Image
-            source={require("../assets/gambia.png")}
-            style={styles.image}
-          />
-          <Text style={styles.text}>+220</Text>
+          <Image source={selectedCountry.flag} style={styles.image} />
+          <Text style={styles.text}>{selectedCountry.countryCode}</Text>
           <Ionicons name="chevron-down" size={20} />
         </TouchableOpacity>
         <View style={styles.right}>
@@ -103,16 +106,24 @@ const PhoneInput = ({ phone, setPhone }) => {
         <TouchableWithoutFeedback onPress={() => setShowModal(false)}>
           <View style={styles.modalOverlay}>
             <View style={styles.modalContent}>
-              <Pressable style={styles.row}>
-                <Image
-                  style={styles.image}
-                  source={require("../assets/gambia.png")}
-                />
-                <Text style={styles.modalText}>
-                  Gambia<Text style={styles.modalTextSmall}>+220</Text>
-                </Text>
-                <View style={styles.radio} />
-              </Pressable>
+              {COUNTRIES.map((country) => (
+                <TouchableOpacity
+                  style={[styles.row, { paddingVertical: 15 }]}
+                  key={country.id}
+                  onPress={() => handleCountrySelect(country)}
+                >
+                  <View style={styles.row}>
+                    <Image style={styles.image} source={country.flag} />
+                    <Text style={styles.modalText}>
+                      {country.name}
+                      <Text style={[styles.modalTextSmall]}>
+                        {country.countryCode}
+                      </Text>
+                    </Text>
+                  </View>
+                  <View style={styles.radio} />
+                </TouchableOpacity>
+              ))}
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -201,6 +212,10 @@ const styles = StyleSheet.create({
   modalText: {
     fontSize: 16,
     textAlign: "left",
+    marginLeft: 10,
   },
-  modalTextSmall: {},
+  modalTextSmall: {
+    color: "#ccc",
+    fontSize: 12,
+  },
 });
