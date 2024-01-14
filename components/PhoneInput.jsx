@@ -13,7 +13,7 @@ import React, { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { COUNTRIES } from "../constant/data";
 import { COLORS } from "../constant/colors";
-import Keypad from "./Keypad";
+import Numpad from "./Numpad";
 
 const NumberPad = ({ number, ...rest }) => {
   return (
@@ -78,7 +78,7 @@ const PhoneInput = ({ phone, setPhone }) => {
           {showBlinker && <View style={styles.blinker} />}
         </View>
       </View>
-      <Keypad phone={phone} setPhone={setPhone} />
+      <Numpad number={phone} setNumber={setPhone} />
 
       <Modal transparent visible={showModal}>
         <TouchableWithoutFeedback onPress={() => setShowModal(false)}>

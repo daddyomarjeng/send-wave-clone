@@ -10,26 +10,27 @@ const NumberPad = ({ number, ...rest }) => {
   );
 };
 
-const Keypad = ({ phone, setPhone }) => {
+const Numpad = ({ number, setNumber, maxLength = 7, topComponent }) => {
   const handleChange = (input) => {
-    if (phone?.length >= 7 && input !== "-1") return;
+    if (number?.length >= maxLength && input !== "-1") return;
     let val;
     if (input === "-1") {
-      if (phone?.length <= 0 || !phone) {
+      if (number?.length <= 0 || !number) {
         val = "";
       } else {
-        val = phone.toString().substring(0, phone.length - 1);
+        val = number.toString().substring(0, number.length - 1);
       }
-    } else if ((!phone && input === "0") || (!phone && input === "00")) {
+    } else if ((!number && input === "0") || (!number && input === "00")) {
       val = "";
     } else {
-      val = phone ? phone + input : input;
+      val = number ? number + input : input;
     }
 
-    setPhone(val);
+    setNumber(val);
   };
   return (
     <View style={styles.container}>
+      {topComponent && topComponent}
       <View style={styles.row}>
         <NumberPad number={1} onPress={() => handleChange("1")} />
         <NumberPad number={2} onPress={() => handleChange("2")} />
@@ -57,7 +58,7 @@ const Keypad = ({ phone, setPhone }) => {
   );
 };
 
-export default Keypad;
+export default Numpad;
 
 const styles = StyleSheet.create({
   container: {

@@ -1,12 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import LoginScreen from "./screens/auth";
+import OtpScreen from "./screens/auth/OtpScreen";
 
 export default function App() {
   return (
     <View style={styles.container}>
       {/* <StatusBar style="auto" /> */}
-      <LoginScreen />
+      {/* <LoginScreen /> */}
+      <OtpScreen />
     </View>
   );
 }
