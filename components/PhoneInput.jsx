@@ -12,6 +12,8 @@ import {
 import React, { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { COUNTRIES } from "../constant/data";
+import { COLORS } from "../constant/colors";
+import Keypad from "./Keypad";
 
 const NumberPad = ({ number, ...rest }) => {
   return (
@@ -76,36 +78,13 @@ const PhoneInput = ({ phone, setPhone }) => {
           {showBlinker && <View style={styles.blinker} />}
         </View>
       </View>
-      <View style={styles.bottom}>
-        <View style={styles.row}>
-          <NumberPad number={1} onPress={() => handleChange("1")} />
-          <NumberPad number={2} onPress={() => handleChange("2")} />
-          <NumberPad number={3} onPress={() => handleChange("3")} />
-        </View>
-        <View style={styles.row}>
-          <NumberPad number={4} onPress={() => handleChange("4")} />
-          <NumberPad number={5} onPress={() => handleChange("5")} />
-          <NumberPad number={6} onPress={() => handleChange("6")} />
-        </View>
-        <View style={styles.row}>
-          <NumberPad number={7} onPress={() => handleChange("7")} />
-          <NumberPad number={8} onPress={() => handleChange("8")} />
-          <NumberPad number={9} onPress={() => handleChange("9")} />
-        </View>
-        <View style={styles.row}>
-          <NumberPad number={"\t\t\t\t\t"} disabled />
-          <NumberPad number={0} onPress={() => handleChange("0")} />
-          <NumberPad
-            number={<Ionicons name="backspace" size={30} />}
-            onPress={() => handleChange("-1")}
-          />
-        </View>
-      </View>
+      <Keypad phone={phone} setPhone={setPhone} />
 
       <Modal transparent visible={showModal}>
         <TouchableWithoutFeedback onPress={() => setShowModal(false)}>
           <View style={styles.modalOverlay}>
             <View style={styles.modalContent}>
+              <Text style={styles.h1}>Selcet Country</Text>
               {COUNTRIES.map((country) => (
                 <TouchableOpacity
                   style={[styles.row, { paddingVertical: 15 }]}
@@ -121,7 +100,29 @@ const PhoneInput = ({ phone, setPhone }) => {
                       </Text>
                     </Text>
                   </View>
-                  <View style={styles.radio} />
+                  <View
+                    style={[
+                      styles.radio,
+                      {
+                        borderColor:
+                          selectedCountry.id === country.id
+                            ? COLORS.primary
+                            : "#111",
+                      },
+                    ]}
+                  >
+                    <View
+                      style={{
+                        height: 12,
+                        width: 12,
+                        borderRadius: 10,
+                        backgroundColor:
+                          selectedCountry.id === country.id
+                            ? COLORS.primary
+                            : "transparent",
+                      }}
+                    />
+                  </View>
                 </TouchableOpacity>
               ))}
             </View>
@@ -201,13 +202,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     width: "90%",
     padding: 15,
-    borderRadius: 10,
+    // borderRadius: 10,
   },
   radio: {
-    height: 15,
-    width: 15,
+    height: 18,
+    width: 18,
     borderRadius: 10,
     borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   modalText: {
     fontSize: 16,
@@ -217,5 +220,10 @@ const styles = StyleSheet.create({
   modalTextSmall: {
     color: "#ccc",
     fontSize: 12,
+  },
+  h1: {
+    fontSize: 22,
+    fontWeight: "bold",
+    marginBottom: 10,
   },
 });
