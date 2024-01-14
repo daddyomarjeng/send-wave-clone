@@ -1,11 +1,13 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import Numpad from "../../components/Numpad";
+import BackButton from "../../components/BackButton";
 
 const OtpScreen = () => {
   const [pin, setPin] = useState(null);
   return (
     <View style={styles.container}>
+      <BackButton />
       <Text style={styles.heading}>
         Enter the vlidation code that we texted to 3540237
       </Text>
