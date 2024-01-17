@@ -5,6 +5,7 @@ import { COLORS } from "../../constant/colors";
 import SettingsButton from "./SettingsButton";
 import UserBalance from "./UserBalance";
 import DashboardIcons from "./DashboardIcons";
+import QrCode from "./QrCode";
 
 const DashboardScreen = () => {
   return (
@@ -13,6 +14,9 @@ const DashboardScreen = () => {
       <View style={styles.top}>
         <SettingsButton />
         <UserBalance />
+        <View style={styles.qrCodeContainer}>
+          <QrCode />
+        </View>
       </View>
 
       <View style={styles.bottom}>
@@ -41,5 +45,13 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     overflow: "hidden",
+  },
+  qrCodeContainer: {
+    position: "absolute",
+    bottom: -70,
+    left: 0,
+    right: 0,
+    alignItems: "center",
+    zIndex: 999,
   },
 });

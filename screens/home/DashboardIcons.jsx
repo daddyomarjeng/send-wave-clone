@@ -5,6 +5,7 @@ import {
   MaterialCommunityIcons,
   FontAwesome5,
 } from "@expo/vector-icons";
+import QrCode from "./QrCode";
 
 const DashboardIcons = () => {
   return (
