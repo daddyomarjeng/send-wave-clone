@@ -4,6 +4,7 @@ import { StatusBar } from "expo-status-bar";
 import { COLORS } from "../../constant/colors";
 import SettingsButton from "./SettingsButton";
 import UserBalance from "./UserBalance";
+import DashboardIcons from "./DashboardIcons";
 
 const DashboardScreen = () => {
   return (
@@ -14,7 +15,9 @@ const DashboardScreen = () => {
         <UserBalance />
       </View>
 
-      <View style={styles.bottom}></View>
+      <View style={styles.bottom}>
+        <DashboardIcons />
+      </View>
     </View>
   );
 };
