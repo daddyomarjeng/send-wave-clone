@@ -9,7 +9,7 @@ const OtpScreen = () => {
     <View style={styles.container}>
       <BackButton />
       <Text style={styles.heading}>
-        Enter the vlidation code that we texted to 3540237
+        Enter the validation code that we texted to 3540237
       </Text>
       <Text style={styles.pin}>{pin}</Text>
       <Numpad
