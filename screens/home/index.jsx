@@ -6,6 +6,7 @@ import SettingsButton from "./SettingsButton";
 import UserBalance from "./UserBalance";
 import DashboardIcons from "./DashboardIcons";
 import QrCode from "./QrCode";
+import RecentTransactions from "./RecentTransactions";
 
 const DashboardScreen = () => {
   return (
@@ -21,6 +22,7 @@ const DashboardScreen = () => {
 
       <View style={styles.bottom}>
         <DashboardIcons />
+        <RecentTransactions />
       </View>
     </View>
   );
