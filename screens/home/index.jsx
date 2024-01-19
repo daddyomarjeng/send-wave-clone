@@ -1,5 +1,5 @@
-import { ScrollView, StyleSheet, View } from "react-native";
-import React from "react";
+import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { COLORS } from "../../constant/colors";
 import SettingsButton from "./SettingsButton";
@@ -9,8 +9,23 @@ import QrCode from "./QrCode";
 import RecentTransactions from "./RecentTransactions";
 
 const DashboardScreen = () => {
+  const [refreshing, setRefreshing] = useState(false);
+  const [showTransactions, setShowTransactions] = useState(false);
+
+  const handleRefresh = () => {
+    setTimeout(() => {
+      setShowTransactions(true);
+      console.log("Hii");
+      setRefreshing(false);
+    }, 2000);
+  };
   return (
-    <ScrollView contentContainerStyle={styles.scrollView}>
+    <ScrollView
+      contentContainerStyle={styles.scrollView}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+      }
+    >
       <StatusBar style="light" />
       <SettingsButton />
       <View style={styles.container}>
@@ -23,7 +38,7 @@ const DashboardScreen = () => {
 
         <View style={styles.bottom}>
           <DashboardIcons />
-          <RecentTransactions />
+          <RecentTransactions showTransactions={showTransactions} />
         </View>
       </View>
     </ScrollView>
@@ -41,7 +56,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   top: {
-    minHeight: 200,
+    // minHeight: 200,
+    minHeight: 150,
   },
 
   bottom: {

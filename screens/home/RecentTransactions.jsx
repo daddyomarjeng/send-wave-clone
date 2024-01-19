@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import { COLORS } from "../../constant/colors";
 import TransactionList from "./TransactionList";
 
-const RecentTransactions = () => {
-  const [showTransactions, setShowTransactions] = useState(false);
+const RecentTransactions = ({ showTransactions }) => {
   return (
     <View style={styles.container}>
       {!showTransactions ? (
