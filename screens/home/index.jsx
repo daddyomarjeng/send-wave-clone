@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { COLORS } from "../../constant/colors";
@@ -10,31 +10,35 @@ import RecentTransactions from "./RecentTransactions";
 
 const DashboardScreen = () => {
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.scrollView}>
       <StatusBar style="light" />
-      <View style={styles.top}>
-        <SettingsButton />
-        <UserBalance />
-        <View style={styles.qrCodeContainer}>
-          <QrCode />
+      <SettingsButton />
+      <View style={styles.container}>
+        <View style={styles.top}>
+          <UserBalance />
+          <View style={styles.qrCodeContainer}>
+            <QrCode />
+          </View>
+        </View>
+
+        <View style={styles.bottom}>
+          <DashboardIcons />
+          <RecentTransactions />
         </View>
       </View>
-
-      <View style={styles.bottom}>
-        <DashboardIcons />
-        <RecentTransactions />
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
 export default DashboardScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  scrollView: {
     paddingTop: 30,
     backgroundColor: COLORS.bg,
+  },
+  container: {
+    flex: 1,
   },
   top: {
     minHeight: 200,

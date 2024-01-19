@@ -1,15 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import TransactionItem from "./TransactionItem";
 
-const TransactionList = () => {
+const TransactionItem = () => {
   return (
     <View>
-      <TransactionItem />
+      <Text>TransactionItem</Text>
     </View>
   );
 };
 
-export default TransactionList;
+export default TransactionItem;
 
 const styles = StyleSheet.create({});
