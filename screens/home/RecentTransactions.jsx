@@ -1,16 +1,22 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { COLORS } from "../../constant/colors";
+import TransactionList from "./TransactionList";
 
 const RecentTransactions = () => {
+  const [showTransactions, setShowTransactions] = useState(false);
   return (
     <View style={styles.container}>
-      <View style={styles.infoContainer}>
-        <Text style={styles.infoText}>Deposit and Withdraw for free!</Text>
-        <Text style={[styles.infoText, { color: COLORS.primary }]}>
-          Call 1222 toll free to find your nearest wave agent
-        </Text>
-      </View>
+      {!showTransactions ? (
+        <View style={styles.infoContainer}>
+          <Text style={styles.infoText}>Deposit and Withdraw for free!</Text>
+          <Text style={[styles.infoText, { color: COLORS.primary }]}>
+            Call 1222 toll free to find your nearest wave agent
+          </Text>
+        </View>
+      ) : (
+        <TransactionList />
+      )}
     </View>
   );
 };
