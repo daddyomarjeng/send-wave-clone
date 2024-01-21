@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
   left: {},
   right: {},
-  text: { fontSize: 20, color: COLORS.bg, fontWeight: "bold" },
+  text: { fontSize: 20, color: "darkblue", fontWeight: "bold" },
   textLight: {
     fontSize: 16,
     color: "#999",
