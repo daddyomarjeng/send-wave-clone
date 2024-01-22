@@ -25,12 +25,15 @@ const DashboardScreen = () => {
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
       }
+      stickyHeaderIndices={[1]}
     >
       <StatusBar style="light" />
-      <SettingsButton />
+      <View style={{ backgroundColor: COLORS.bg, zIndex: 999 }}>
+        <SettingsButton />
+        <UserBalance />
+      </View>
       <View style={styles.container}>
         <View style={styles.top}>
-          <UserBalance />
           <View style={styles.qrCodeContainer}>
             <QrCode />
           </View>
@@ -57,7 +60,7 @@ const styles = StyleSheet.create({
   },
   top: {
     // minHeight: 200,
-    minHeight: 150,
+    minHeight: 100,
   },
 
   bottom: {
@@ -74,6 +77,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     alignItems: "center",
-    zIndex: 999,
+    zIndex: 1,
   },
 });
