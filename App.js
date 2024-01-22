@@ -5,6 +5,7 @@ import OtpScreen from "./screens/auth/OtpScreen";
 import LegalNameScreen from "./screens/auth/LegalNameScreen";
 import PinScreen from "./screens/auth/PinScreen";
 import DashboardScreen from "./screens/home";
+import TransactionScreen from "./screens/transaction";
 
 export default function App() {
   return (
@@ -14,7 +15,8 @@ export default function App() {
       {/* <OtpScreen /> */}
       {/* <LegalNameScreen /> */}
       {/* <PinScreen /> */}
-      <DashboardScreen />
+      {/* <DashboardScreen /> */}
+      <TransactionScreen />
     </View>
   );
 }
