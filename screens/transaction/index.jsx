@@ -8,7 +8,7 @@ import TransactionRow from "./TransactionRow";
 import AmountRow from "./AmountRow";
 
 const TransactionScreen = () => {
-  const transaction = TRANSACTIONS[3];
+  const transaction = TRANSACTIONS[0];
   const amount = useAmount(transaction);
   return (
     <View style={styles.container}>

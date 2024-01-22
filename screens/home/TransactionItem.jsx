@@ -42,18 +42,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   right: {
-    width: 130,
+    width: 120,
     alignItems: "center",
   },
   text: {
-    fontSize: 16,
+    fontSize: 14,
     color: "darkblue",
     fontWeight: "bold",
-    letterSpacing: 1.5,
+    // letterSpacing: 1.5,
   },
   textLight: {
     fontSize: 12,
     color: "#999",
-    letterSpacing: 1.5,
+    // letterSpacing: 1.5,
   },
 });

@@ -15,8 +15,8 @@ export default function App() {
       {/* <OtpScreen /> */}
       {/* <LegalNameScreen /> */}
       {/* <PinScreen /> */}
-      {/* <DashboardScreen /> */}
-      <TransactionScreen />
+      <DashboardScreen />
+      {/* <TransactionScreen /> */}
     </View>
   );
 }
