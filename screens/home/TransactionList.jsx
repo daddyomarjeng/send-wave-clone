@@ -7,7 +7,7 @@ const TransactionList = () => {
   return (
     <View style={styles.container}>
       {TRANSACTIONS.map((transaction) => (
-        <TransactionItem />
+        <TransactionItem key={transaction.id} transaction={transaction} />
       ))}
     </View>
   );
@@ -15,4 +15,9 @@ const TransactionList = () => {
 
 export default TransactionList;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+  },
+});

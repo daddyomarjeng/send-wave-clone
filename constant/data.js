@@ -53,6 +53,7 @@ export const TRANSACTIONS = [
   {
     id: 2,
     type: "receive",
+    from: "Yusupha Jeng",
     amount: "990",
     fee: "10",
     status: "completed",
@@ -64,6 +65,7 @@ export const TRANSACTIONS = [
   {
     id: 3,
     type: "send",
+    to: "Kanni Jeng",
     amount: "2,000",
     total: "2,020",
     fee: "20",
@@ -81,6 +83,7 @@ export const TRANSACTIONS = [
     status: "completed",
     newBalance: "2,045",
     transactionId: "HREIHY2KKDCU4",
+    agentName: "DOJ Rabaraba",
     date: "Aug 28, 2023",
     dateTime: "Jul 08 2023 9:20 PM",
   },
@@ -99,6 +102,7 @@ export const TRANSACTIONS = [
   {
     id: 6,
     type: "receive",
+    from: "Yusupha Jeng",
     amount: "990",
     fee: "10",
     status: "completed",
@@ -110,6 +114,7 @@ export const TRANSACTIONS = [
   {
     id: 7,
     type: "send",
+    to: "Kanni Jeng",
     amount: "2,000",
     total: "2,020",
     fee: "20",
@@ -127,6 +132,7 @@ export const TRANSACTIONS = [
     status: "completed",
     newBalance: "2,045",
     transactionId: "HREIHY2KKDCU4",
+    agentName: "DOJ Rabaraba",
     date: "Aug 28, 2023",
     dateTime: "Jul 08 2023 9:20 PM",
   },
@@ -145,6 +151,7 @@ export const TRANSACTIONS = [
   {
     id: 10,
     type: "receive",
+    from: "Yusupha Jeng",
     amount: "990",
     fee: "10",
     status: "completed",
@@ -156,6 +163,7 @@ export const TRANSACTIONS = [
   {
     id: 11,
     type: "send",
+    to: "Kanni Jeng",
     amount: "2,000",
     total: "2,020",
     fee: "20",
@@ -173,6 +181,7 @@ export const TRANSACTIONS = [
     status: "completed",
     newBalance: "2,045",
     transactionId: "HREIHY2KKDCU4",
+    agentName: "DOJ Rabaraba",
     date: "Aug 28, 2023",
     dateTime: "Jul 08 2023 9:20 PM",
   },

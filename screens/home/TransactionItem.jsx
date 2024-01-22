@@ -1,20 +1,30 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { COLORS } from "../../constant/colors";
 
-const TransactionItem = () => {
+const TransactionItem = ({ transaction }) => {
+  const label =
+    transaction?.type === "withdrawal"
+      ? "Withdrawal"
+      : transaction?.type === "receive"
+      ? `Received from ${transaction?.from}`
+      : transaction?.type === "send"
+      ? `Sent to ${transaction.to}`
+      : transaction.type === "deposit"
+      ? "Deposit"
+      : "";
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container}>
       <View style={styles.left}>
         <Text style={styles.text} numberOfLines={2}>
-          Withdrawal
+          {label}
         </Text>
-        <Text style={styles.textLight}>Jul 04, 2023</Text>
+        <Text style={styles.textLight}>{transaction?.date}</Text>
       </View>
       <View style={styles.right}>
-        <Text style={styles.text}>1,000</Text>
+        <Text style={styles.text}>{transaction?.amount} GMD</Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
@@ -25,12 +35,25 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    marginBottom: 10,
+    gap: 10,
   },
-  left: {},
-  right: {},
-  text: { fontSize: 20, color: "darkblue", fontWeight: "bold" },
-  textLight: {
+  left: {
+    flex: 1,
+  },
+  right: {
+    width: 130,
+    alignItems: "center",
+  },
+  text: {
     fontSize: 16,
+    color: "darkblue",
+    fontWeight: "bold",
+    letterSpacing: 1.5,
+  },
+  textLight: {
+    fontSize: 12,
     color: "#999",
+    letterSpacing: 1.5,
   },
 });
