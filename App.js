@@ -6,19 +6,34 @@ import LegalNameScreen from "./screens/auth/LegalNameScreen";
 import PinScreen from "./screens/auth/PinScreen";
 import DashboardScreen from "./screens/home";
 import TransactionScreen from "./screens/transaction";
+import AppNav from "./navigations";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      {/* <LoginScreen /> */}
-      {/* <OtpScreen /> */}
-      {/* <LegalNameScreen /> */}
-      {/* <PinScreen /> */}
-      <DashboardScreen />
-      {/* <TransactionScreen /> */}
-    </View>
-  );
+  // return (
+  // <View style={styles.container}>
+  //  <StatusBar style="auto" />
+  {
+    /* <LoginScreen /> */
+  }
+  {
+    /* <OtpScreen /> */
+  }
+  {
+    /* <LegalNameScreen /> */
+  }
+  {
+    /* <PinScreen /> */
+  }
+  {
+    /* <DashboardScreen /> */
+  }
+  {
+    /* <TransactionScreen /> */
+  }
+  // </View>
+
+  // );
+  return <AppNav />;
 }
 
 const styles = StyleSheet.create({
