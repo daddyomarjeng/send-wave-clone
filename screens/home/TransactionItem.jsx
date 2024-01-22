@@ -1,8 +1,16 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import { COLORS } from "../../constant/colors";
 
 const TransactionItem = ({ transaction }) => {
+  const navigation = useNavigation();
   const label =
     transaction?.type === "withdrawal"
       ? "Withdrawal"
@@ -14,7 +22,10 @@ const TransactionItem = ({ transaction }) => {
       ? "Deposit"
       : "";
   return (
-    <Pressable style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigation.navigate("Transaction", { transaction })}
+    >
       <View style={styles.left}>
         <Text style={styles.text} numberOfLines={2}>
           {label}
@@ -24,7 +35,7 @@ const TransactionItem = ({ transaction }) => {
       <View style={styles.right}>
         <Text style={styles.text}>{transaction?.amount} GMD</Text>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 
@@ -35,8 +46,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 10,
     gap: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#eee",
+    paddingBottom: 10,
+    marginBottom: 10,
   },
   left: {
     flex: 1,

@@ -1,5 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { StatusBar } from "expo-status-bar";
+
+import { useRoute } from "@react-navigation/native";
 import BackButton from "../../components/BackButton";
 import { TRANSACTIONS } from "../../constant/data";
 import useAmount from "../../hooks/useAmount";
@@ -8,10 +11,13 @@ import TransactionRow from "./TransactionRow";
 import AmountRow from "./AmountRow";
 
 const TransactionScreen = () => {
-  const transaction = TRANSACTIONS[0];
+  //   const transaction = TRANSACTIONS[0];
+  const route = useRoute();
+  const transaction = route?.params?.transaction;
   const amount = useAmount(transaction);
   return (
     <View style={styles.container}>
+      <StatusBar style="dark" />
       <BackButton />
       <View style={styles.top}>
         <View style={styles.row}>

@@ -6,11 +6,13 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import BackButton from "../../components/BackButton";
 import { COLORS } from "../../constant/colors";
 import AppButton from "../../components/AppButton";
 
 const LegalNameScreen = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <BackButton />
@@ -25,7 +27,7 @@ const LegalNameScreen = () => {
         <Text style={styles.underline}>Terms and Conditions</Text>
       </Text>
       <View style={styles.bottom}>
-        <AppButton title={"Next"} />
+        <AppButton title={"Next"} onPress={() => navigation.navigate("Pin")} />
       </View>
     </View>
   );

@@ -10,7 +10,13 @@ const NumberPad = ({ number, ...rest }) => {
   );
 };
 
-const Numpad = ({ number, setNumber, maxLength = 7, topComponent }) => {
+const Numpad = ({
+  number,
+  setNumber,
+  maxLength = 7,
+  topComponent,
+  onMaxLength = () => {},
+}) => {
   const handleChange = (input) => {
     if (number?.length >= maxLength && input !== "-1") return;
     let val;
@@ -27,6 +33,9 @@ const Numpad = ({ number, setNumber, maxLength = 7, topComponent }) => {
     }
 
     setNumber(val);
+
+    // navigate
+    if (number?.length >= maxLength - 1 && input !== "-1") return onMaxLength();
   };
   return (
     <View style={styles.container}>

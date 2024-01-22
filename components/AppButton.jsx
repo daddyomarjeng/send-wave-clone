@@ -2,9 +2,9 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { COLORS } from "../constant/colors";
 
-const AppButton = ({ title }) => {
+const AppButton = ({ title, ...rest }) => {
   return (
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.button} {...rest}>
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );

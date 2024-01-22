@@ -1,9 +1,11 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import Numpad from "../../components/Numpad";
 import BackButton from "../../components/BackButton";
 
 const OtpScreen = () => {
+  const navigation = useNavigation();
   const [pin, setPin] = useState(null);
   return (
     <View style={styles.container}>
@@ -16,6 +18,7 @@ const OtpScreen = () => {
         number={pin}
         setNumber={setPin}
         maxLength={4}
+        onMaxLength={() => navigation.navigate("LegalName")}
         topComponent={
           <TouchableOpacity>
             <Text style={styles.resend}>Resend SMS in 0.09</Text>
