@@ -12,6 +12,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import useContacts from "../../hooks/useContacts";
 import { COLORS } from "../../constant/colors";
 import ContactItem from "../../components/ContactItem";
+import AppHeader from "../../components/AppHeader";
 
 const SendMoneyScreen = () => {
   const contacts = useContacts();
@@ -22,6 +23,7 @@ const SendMoneyScreen = () => {
 
   return (
     <View style={styles.container}>
+      <AppHeader title="Send Money" />
       {!contacts ? (
         <ActivityIndicator size="large" color={COLORS.primary} />
       ) : (
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 15,
     paddingTop: 30,
-    // backgroundColor: "#f1f1f0",
+    backgroundColor: "#fff",
   },
   contactsContainer: {
     flex: 1,
@@ -87,7 +89,7 @@ const styles = StyleSheet.create({
     paddingVertical: 13,
     // backgroundColor: "#fff",
     marginBottom: 10,
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
   },
   addButton: {
     backgroundColor: COLORS.primary,
