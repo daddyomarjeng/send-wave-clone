@@ -18,10 +18,22 @@ const SendMoneyScreen = () => {
   const contacts = useContacts();
   const [search, setSearch] = useState("");
   const [filteredContacts, setFilteredContacts] = useState([]);
+  const [showModal, setShowModal] = useState([]);
 
-  const handleSearch = (text) => {
-    // setFilteredContacts(con)
-  };
+  const handleSearch = text => {
+    setSearch(text);
+    const searchResult = contacts.filter(
+        contact =>
+            (contact.phoneNumbers &&
+                contact.phoneNumbers[0].number
+                    .split(' ')
+                    .join('')
+                    .includes(text)) ||
+            contact.name.toLowerCase().includes(text.toLowerCase())
+    );
+
+    setFilteredContacts(searchResult);
+};
   useEffect(() => {
     if (!contacts) return;
     setFilteredContacts(contacts);
@@ -29,6 +41,8 @@ const SendMoneyScreen = () => {
       setFilteredContacts([]);
     };
   }, [contacts]);
+
+  
   return (
     <View style={styles.container}>
       <AppHeader title="Send Money" />
