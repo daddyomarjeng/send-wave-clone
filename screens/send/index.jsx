@@ -1,12 +1,14 @@
 import {
   ActivityIndicator,
+  Keyboard,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import BigList from "react-native-big-list";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import useContacts from "../../hooks/useContacts";
@@ -19,21 +21,21 @@ const SendMoneyScreen = () => {
   const [search, setSearch] = useState("");
   const [filteredContacts, setFilteredContacts] = useState([]);
   const [showModal, setShowModal] = useState([]);
+  const searchInput = useRef(null);
+  const [inputBorderColor, setInputBorderColor] = useState("#111");
 
-  const handleSearch = text => {
+  const handleSearch = (text) => {
     setSearch(text);
     const searchResult = contacts.filter(
-        contact =>
-            (contact.phoneNumbers &&
-                contact.phoneNumbers[0].number
-                    .split(' ')
-                    .join('')
-                    .includes(text)) ||
-            contact.name.toLowerCase().includes(text.toLowerCase())
+      (contact) =>
+        (contact.phoneNumbers &&
+          contact.phoneNumbers[0].number.split(" ").join("").includes(text)) ||
+        contact.name.toLowerCase().includes(text.toLowerCase())
     );
 
     setFilteredContacts(searchResult);
-};
+  };
+
   useEffect(() => {
     if (!contacts) return;
     setFilteredContacts(contacts);
@@ -42,44 +44,59 @@ const SendMoneyScreen = () => {
     };
   }, [contacts]);
 
-  
   return (
-    <View style={styles.container}>
-      <AppHeader title="Send Money" />
-      {!contacts && <ActivityIndicator size="large" color={COLORS.primary} />}
-      <View style={styles.contactsContainer}>
-        <View style={styles.searchContainer}>
-          <TextInput
-            style={styles.searchInput}
-            placeholder={"TO:"}
-            value={search}
-            onChangeText={handleSearch}
-            // autoFocus
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <AppHeader title="Send Money" />
+        {!contacts && <ActivityIndicator size="large" color={COLORS.primary} />}
+        <View style={styles.contactsContainer}>
+          <View style={styles.searchContainer}>
+            <TextInput
+              ref={searchInput}
+              style={[
+                styles.searchInput,
+                {
+                  borderColor: inputBorderColor,
+                  // searchInput?.current?.isFocused() && COLORS.primary,
+                  // borderColor: searchInput?.current?.onBlur() && "#111",
+                },
+              ]}
+              onBlur={() => setInputBorderColor("#111")}
+              onFocus={() => setInputBorderColor(COLORS.primary)}
+              placeholder={"TO:"}
+              value={search}
+              onChangeText={handleSearch}
+              autoFocus
+            />
+          </View>
+          <BigList
+            //   data={filteredContacts}
+            data={filteredContacts}
+            ListEmptyComponent={() => <Text>No Contacts found...</Text>}
+            renderItem={({ item, index }) => (
+              <ContactItem item={item} onPress={() => {}} />
+            )}
+            itemHeight={60}
+            keyExtractor={(item) => item.id.toString()}
+            renderHeader={() => (
+              <TouchableOpacity onPress={() => setShowModal(true)}>
+                <View style={styles.row}>
+                  <View style={styles.addButton}>
+                    <MaterialCommunityIcons
+                      name="plus"
+                      size={36}
+                      color="#FFF"
+                    />
+                  </View>
+                  <Text style={styles.h1}>Enter a new number</Text>
+                </View>
+              </TouchableOpacity>
+            )}
+            headerHeight={80}
           />
         </View>
-        <BigList
-          //   data={filteredContacts}
-          data={filteredContacts}
-          ListEmptyComponent={() => <Text>No Contacts found...</Text>}
-          renderItem={({ item, index }) => (
-            <ContactItem item={item} onPress={() => {}} />
-          )}
-          itemHeight={60}
-          keyExtractor={(item) => item.id.toString()}
-          renderHeader={() => (
-            <TouchableOpacity onPress={() => setShowModal(true)}>
-              <View style={styles.row}>
-                <View style={styles.addButton}>
-                  <MaterialCommunityIcons name="plus" size={36} color="#FFF" />
-                </View>
-                <Text style={styles.h1}>Enter a new number</Text>
-              </View>
-            </TouchableOpacity>
-          )}
-          headerHeight={80}
-        />
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
