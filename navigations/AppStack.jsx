@@ -14,7 +14,7 @@ const AppStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false, animation: "slide_from_right" }}
-      initialRouteName="Send"
+      // initialRouteName="Send"
     >
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="OTP" component={OtpScreen} />

@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
+import OtpInput from "./OtpInput";
 
 const NumberPad = ({ number, ...rest }) => {
   return (
@@ -16,7 +17,10 @@ const Numpad = ({
   maxLength = 7,
   topComponent,
   onMaxLength = () => {},
+  showOtpInputs = true,
+  showPlainPin,
 }) => {
+  const [isPinReady, setIsPinReady] = useState(false);
   const handleChange = (input) => {
     if (number?.length >= maxLength && input !== "-1") return;
     let val;
@@ -40,6 +44,7 @@ const Numpad = ({
   return (
     <View style={styles.container}>
       {topComponent && topComponent}
+
       <View style={styles.row}>
         <NumberPad number={1} onPress={() => handleChange("1")} />
         <NumberPad number={2} onPress={() => handleChange("2")} />
@@ -63,6 +68,15 @@ const Numpad = ({
           onPress={() => handleChange("-1")}
         />
       </View>
+      {showOtpInputs && (
+        <View style={styles.otpContainer}>
+          <OtpInput
+            number={number}
+            maxLength={maxLength}
+            showPlainPin={showPlainPin}
+          />
+        </View>
+      )}
     </View>
   );
 };
@@ -88,5 +102,12 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: "#777",
     fontWeight: "bold",
+  },
+  otpContainer: {
+    position: "absolute",
+    top: 25,
+    left: 0,
+    right: 0,
+    alignItems: "center",
   },
 });

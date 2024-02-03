@@ -1,28 +1,49 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Numpad from "../../components/Numpad";
 import BackButton from "../../components/BackButton";
+import { COLORS } from "../../constant/colors";
 
 const OtpScreen = () => {
   const navigation = useNavigation();
   const [pin, setPin] = useState(null);
+  const [timer, setTimer] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (timer === 0) return;
+      setTimer((prev) => prev - 1);
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [timer]);
   return (
     <View style={styles.container}>
       <BackButton />
       <Text style={styles.heading}>
         Enter the validation code that we texted to 3540237
       </Text>
-      <Text style={styles.pin}>{pin}</Text>
+      {/* <Text style={styles.pin}>{pin}</Text> */}
       <Numpad
+        showPlainPin
         number={pin}
         setNumber={setPin}
         maxLength={4}
         onMaxLength={() => navigation.navigate("LegalName")}
         topComponent={
-          <TouchableOpacity>
-            <Text style={styles.resend}>Resend SMS in 0.09</Text>
-          </TouchableOpacity>
+          <View>
+            {timer > 0 ? (
+              <Text style={styles.resend}>Resend SMS in {timer}</Text>
+            ) : (
+              <TouchableOpacity onPress={() => setTimer(30)}>
+                <Text style={[styles.resend, { color: COLORS.primary }]}>
+                  Resend
+                </Text>
+              </TouchableOpacity>
+            )}
+          </View>
         }
       />
     </View>

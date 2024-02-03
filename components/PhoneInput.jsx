@@ -15,47 +15,23 @@ import { COUNTRIES } from "../constant/data";
 import { COLORS } from "../constant/colors";
 import Numpad from "./Numpad";
 
-const NumberPad = ({ number, ...rest }) => {
-  return (
-    <TouchableOpacity style={styles.numPad} {...rest}>
-      <Text style={styles.numPadText}>{number}</Text>
-    </TouchableOpacity>
-  );
-};
 const PhoneInput = ({ phone, setPhone }) => {
   const [showBlinker, setShowBlinker] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
 
-  const handleChange = (input) => {
-    if (phone?.length >= 7 && input !== "-1") return;
-    let val;
-    if (input === "-1") {
-      if (phone?.length <= 0 || !phone) {
-        val = "";
-      } else {
-        val = phone.toString().substring(0, phone.length - 1);
-      }
-    } else if ((!phone && input === "0") || (!phone && input === "00")) {
-      val = "";
-    } else {
-      val = phone ? phone + input : input;
-    }
-
-    setPhone(val);
-  };
   const handleCountrySelect = (country) => {
     setSelectedCountry(country);
     setShowModal(false);
   };
 
-  useEffect(() => {
-    // Change the state every second or the time given by User.
-    const interval = setInterval(() => {
-      setShowBlinker((showBlinker) => !showBlinker);
-    }, 800);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   // Change the state every second or the time given by User.
+  //   const interval = setInterval(() => {
+  //     setShowBlinker((showBlinker) => !showBlinker);
+  //   }, 800);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <View style={styles.container}>
@@ -78,7 +54,7 @@ const PhoneInput = ({ phone, setPhone }) => {
           {showBlinker && <View style={styles.blinker} />}
         </View>
       </View>
-      <Numpad number={phone} setNumber={setPhone} />
+      <Numpad number={phone} setNumber={setPhone} showOtpInputs={false} />
 
       <Modal transparent visible={showModal}>
         <TouchableWithoutFeedback onPress={() => setShowModal(false)}>

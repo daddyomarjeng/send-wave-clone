@@ -1,5 +1,11 @@
 export const COUNTRIES = [
   {
+    id: 3,
+    name: "Gambia",
+    countryCode: "+220",
+    flag: require("../assets/gambia.png"),
+  },
+  {
     id: 1,
     name: "Burkina Faso",
     countryCode: "+226",
@@ -10,12 +16,6 @@ export const COUNTRIES = [
     name: "Côte d'Ivoire",
     countryCode: "+225",
     flag: require("../assets/ivoryCoast.png"),
-  },
-  {
-    id: 3,
-    name: "Gambia",
-    countryCode: "+220",
-    flag: require("../assets/gambia.png"),
   },
   {
     id: 4,

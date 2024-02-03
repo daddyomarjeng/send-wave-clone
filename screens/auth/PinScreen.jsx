@@ -11,7 +11,7 @@ const PinScreen = () => {
     <View style={styles.container}>
       <BackButton />
       <Text style={styles.heading}>Create a new secret code</Text>
-      <Text style={styles.pin}>{pin}</Text>
+      {/* <Text style={styles.pin}>{pin}</Text> */}
       <Numpad
         number={pin}
         setNumber={setPin}
