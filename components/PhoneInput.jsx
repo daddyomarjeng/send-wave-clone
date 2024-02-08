@@ -25,13 +25,15 @@ const PhoneInput = ({ phone, setPhone }) => {
     setShowModal(false);
   };
 
-  // useEffect(() => {
-  //   // Change the state every second or the time given by User.
-  //   const interval = setInterval(() => {
-  //     setShowBlinker((showBlinker) => !showBlinker);
-  //   }, 800);
-  //   return () => clearInterval(interval);
-  // }, []);
+  useEffect(() => {
+    // Change the state every second or the time given by User.
+    const interval = setInterval(() => {
+      setShowBlinker((showBlinker) => !showBlinker);
+    }, 800);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <View style={styles.container}>

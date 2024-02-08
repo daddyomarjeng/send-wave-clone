@@ -20,6 +20,9 @@ const Numpad = ({
   showOtpInputs = true,
   showPlainPin,
 }) => {
+  console.log("====================================");
+  console.log(number);
+  console.log("====================================");
   const [isPinReady, setIsPinReady] = useState(false);
   const handleChange = (input) => {
     if (number?.length >= maxLength && input !== "-1") return;

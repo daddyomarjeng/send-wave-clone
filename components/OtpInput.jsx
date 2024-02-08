@@ -8,12 +8,17 @@ const OtpInput = ({ maxLength = 7, number, showPlainPin = false }) => {
   return (
     <View style={styles.container}>
       {numLengthArray.map((_value, index) => (
-        <View style={styles.input} key={index}>
+        <View
+          style={[styles.input, { borderBottomWidth: showPlainPin ? 2 : 0 }]}
+          key={index}
+        >
           {showPlainPin ? (
             <Text style={styles.text}>{number ? number[index] : ""}</Text>
           ) : number && number[index] ? (
             <View style={styles.dot} />
-          ) : null}
+          ) : (
+            <View style={styles.lightDot} />
+          )}
         </View>
       ))}
     </View>
@@ -31,9 +36,9 @@ const styles = StyleSheet.create({
   input: {
     minWidth: "15%",
     minHeight: 55,
-    borderWidth: 2,
     padding: 12,
-    borderColor: COLORS.primary,
+    // borderColor: COLORS.primary,
+    borderColor: "#ccc",
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
@@ -48,5 +53,12 @@ const styles = StyleSheet.create({
     width: 20,
     backgroundColor: COLORS.primary,
     borderRadius: 20,
+  },
+  lightDot: {
+    height: 20,
+    width: 20,
+    backgroundColor: COLORS.primary,
+    borderRadius: 20,
+    opacity: 0.3,
   },
 });
