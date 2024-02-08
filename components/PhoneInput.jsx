@@ -9,8 +9,10 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { useFocusEffect } from "@react-navigation/native";
+
 import { COUNTRIES } from "../constant/data";
 import { COLORS } from "../constant/colors";
 import Numpad from "./Numpad";
@@ -25,15 +27,38 @@ const PhoneInput = ({ phone, setPhone }) => {
     setShowModal(false);
   };
 
-  useEffect(() => {
-    // Change the state every second or the time given by User.
-    const interval = setInterval(() => {
-      setShowBlinker((showBlinker) => !showBlinker);
-    }, 800);
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+  // useEffect(() => {
+  //   // Change the state every second or the time given by User.
+  //   console.log("====================================");
+  //   console.log("Innn");
+  //   console.log("====================================");
+  //   const interval = setInterval(() => {
+  //     setShowBlinker((showBlinker) => !showBlinker);
+  //   }, 800);
+  //   return () => {
+  //     console.log("====================================");
+  //     console.log("out");
+  //     console.log("====================================");
+  //     clearInterval(interval);
+  //   };
+  // }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      console.log("====================================");
+      console.log("Innn");
+      console.log("====================================");
+      const interval = setInterval(() => {
+        setShowBlinker((showBlinker) => !showBlinker);
+      }, 800);
+      return () => {
+        console.log("====================================");
+        console.log("out");
+        console.log("====================================");
+        clearInterval(interval);
+      };
+    }, [])
+  );
 
   return (
     <View style={styles.container}>
