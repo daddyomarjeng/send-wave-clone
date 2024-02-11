@@ -15,6 +15,7 @@ import useContacts from "../../hooks/useContacts";
 import { COLORS } from "../../constant/colors";
 import ContactItem from "../../components/ContactItem";
 import AppHeader from "../../components/AppHeader";
+import SendMoneyLayout from "../../layouts/SendMoneyLayout";
 
 const SendMoneyScreen = () => {
   const contacts = useContacts();
@@ -45,70 +46,68 @@ const SendMoneyScreen = () => {
   }, [contacts]);
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
-        <AppHeader title="Send Money" />
-        {!contacts && <ActivityIndicator size="large" color={COLORS.primary} />}
-        <View style={styles.contactsContainer}>
-          <View style={styles.searchContainer}>
-            <TextInput
-              ref={searchInput}
-              style={[
-                styles.searchInput,
-                {
-                  borderColor: inputBorderColor,
-                  // searchInput?.current?.isFocused() && COLORS.primary,
-                  // borderColor: searchInput?.current?.onBlur() && "#111",
-                },
-              ]}
-              onBlur={() => setInputBorderColor("#111")}
-              onFocus={() => setInputBorderColor(COLORS.primary)}
-              placeholder={"TO:"}
-              value={search}
-              onChangeText={handleSearch}
-              autoFocus
-            />
-          </View>
-          <BigList
-            //   data={filteredContacts}
-            data={filteredContacts}
-            ListEmptyComponent={() => <Text>No Contacts found...</Text>}
-            renderItem={({ item, index }) => (
-              <ContactItem item={item} onPress={() => {}} />
-            )}
-            itemHeight={60}
-            keyExtractor={(item) => item.id.toString()}
-            renderHeader={() => (
-              <TouchableOpacity onPress={() => setShowModal(true)}>
-                <View style={styles.row}>
-                  <View style={styles.addButton}>
-                    <MaterialCommunityIcons
-                      name="plus"
-                      size={36}
-                      color="#FFF"
-                    />
-                  </View>
-                  <Text style={styles.h1}>Enter a new number</Text>
-                </View>
-              </TouchableOpacity>
-            )}
-            headerHeight={80}
+    // <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    //   <View style={styles.container}>
+    //     <AppHeader title="Send Money" />
+    <SendMoneyLayout>
+      {!contacts && <ActivityIndicator size="large" color={COLORS.primary} />}
+      <View style={styles.contactsContainer}>
+        <View style={styles.searchContainer}>
+          <TextInput
+            ref={searchInput}
+            style={[
+              styles.searchInput,
+              {
+                borderColor: inputBorderColor,
+                // searchInput?.current?.isFocused() && COLORS.primary,
+                // borderColor: searchInput?.current?.onBlur() && "#111",
+              },
+            ]}
+            onBlur={() => setInputBorderColor("#111")}
+            onFocus={() => setInputBorderColor(COLORS.primary)}
+            placeholder={"TO:"}
+            value={search}
+            onChangeText={handleSearch}
+            autoFocus
           />
         </View>
+        <BigList
+          //   data={filteredContacts}
+          data={filteredContacts}
+          ListEmptyComponent={() => <Text>No Contacts found...</Text>}
+          renderItem={({ item, index }) => (
+            <ContactItem item={item} onPress={() => {}} />
+          )}
+          itemHeight={60}
+          keyExtractor={(item) => item.id.toString()}
+          renderHeader={() => (
+            <TouchableOpacity onPress={() => setShowModal(true)}>
+              <View style={styles.row}>
+                <View style={styles.addButton}>
+                  <MaterialCommunityIcons name="plus" size={36} color="#FFF" />
+                </View>
+                <Text style={styles.h1}>Enter a new number</Text>
+              </View>
+            </TouchableOpacity>
+          )}
+          headerHeight={80}
+        />
       </View>
-    </TouchableWithoutFeedback>
+    </SendMoneyLayout>
+    //   </View>
+    // </TouchableWithoutFeedback>
   );
 };
 
 export default SendMoneyScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 15,
-    paddingTop: 30,
-    backgroundColor: "#fff",
-  },
+  // container: {
+  //   flex: 1,
+  //   paddingHorizontal: 15,
+  //   paddingTop: 30,
+  //   backgroundColor: "#fff",
+  // },
   contactsContainer: {
     flex: 1,
     // backgroundColor: "red",
