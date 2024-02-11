@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import BigList from "react-native-big-list";
+import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import useContacts from "../../hooks/useContacts";
 import { COLORS } from "../../constant/colors";
@@ -24,6 +25,7 @@ const SendMoneyScreen = () => {
   const [showModal, setShowModal] = useState([]);
   const searchInput = useRef(null);
   const [inputBorderColor, setInputBorderColor] = useState("#111");
+  const navigation = useNavigation();
 
   const handleSearch = (text) => {
     setSearch(text);
@@ -37,6 +39,13 @@ const SendMoneyScreen = () => {
     setFilteredContacts(searchResult);
   };
 
+  const handleContactSelect = (contact) => {
+    const receiver = {
+      name: contact?.name,
+      phone: contact?.phoneNumbers[0]?.number,
+    };
+    navigation.navigate("SendAmount", { receiver });
+  };
   useEffect(() => {
     if (!contacts) return;
     setFilteredContacts(contacts);
@@ -72,12 +81,13 @@ const SendMoneyScreen = () => {
           />
         </View>
         <BigList
-          //   data={filteredContacts}
           data={filteredContacts}
           ListEmptyComponent={() => <Text>No Contacts found...</Text>}
-          renderItem={({ item, index }) => (
-            <ContactItem item={item} onPress={() => {}} />
-          )}
+          renderItem={({ item, index }) =>
+            !item.phoneNumbers ? null : (
+              <ContactItem item={item} onPress={handleContactSelect} />
+            )
+          }
           itemHeight={60}
           keyExtractor={(item) => item.id.toString()}
           renderHeader={() => (

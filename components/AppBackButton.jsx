@@ -1,9 +1,9 @@
-import { StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { StyleSheet, TouchableOpacity, Alert, View } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
-const BackButton = () => {
+const AppBackButton = () => {
   const navigation = useNavigation();
   return (
     <Ionicons
@@ -15,10 +15,12 @@ const BackButton = () => {
   );
 };
 
-export default BackButton;
+export default AppBackButton;
 
 const styles = StyleSheet.create({
   button: {
     marginTop: 20,
+    // backgroundColor: "red",
+    width: 100,
   },
 });

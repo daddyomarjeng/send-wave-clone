@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View, TouchableWithoutFeedback } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import AppHeader from "../components/AppHeader";

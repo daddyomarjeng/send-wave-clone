@@ -2,14 +2,14 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Numpad from "../../components/Numpad";
-import BackButton from "../../components/BackButton";
+import AppBackButton from "../../components/AppBackButton";
 
 const PinScreen = () => {
   const navigation = useNavigation();
   const [pin, setPin] = useState(null);
   return (
     <View style={styles.container}>
-      <BackButton />
+      <AppBackButton />
       <Text style={styles.heading}>Create a new secret code</Text>
       {/* <Text style={styles.pin}>{pin}</Text> */}
       <Numpad

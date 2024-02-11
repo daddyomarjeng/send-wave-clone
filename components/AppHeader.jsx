@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import BackButton from "./BackButton";
+import AppBackButton from "./AppBackButton";
 
 const AppHeader = ({ title }) => {
   return (
     <View style={styles.container}>
-      <BackButton />
+      <AppBackButton />
       <Text style={styles.title}>{title}</Text>
     </View>
   );

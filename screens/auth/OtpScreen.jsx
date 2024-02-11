@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Numpad from "../../components/Numpad";
-import BackButton from "../../components/BackButton";
+import AppBackButton from "../../components/AppBackButton";
 import { COLORS } from "../../constant/colors";
 
 const OtpScreen = () => {
@@ -21,7 +21,7 @@ const OtpScreen = () => {
   }, [timer]);
   return (
     <View style={styles.container}>
-      <BackButton />
+      <AppBackButton />
       <Text style={styles.heading}>
         Enter the validation code that we texted to 3540237
       </Text>

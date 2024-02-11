@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import BackButton from "../../components/BackButton";
+import AppBackButton from "../../components/AppBackButton";
 import { COLORS } from "../../constant/colors";
 import AppButton from "../../components/AppButton";
 
@@ -15,7 +15,7 @@ const LegalNameScreen = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <BackButton />
+      <AppBackButton />
       <Text style={styles.heading}>Please enter your full legal name</Text>
       <TextInput
         style={styles.name}

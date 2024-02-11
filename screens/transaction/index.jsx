@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { useRoute } from "@react-navigation/native";
-import BackButton from "../../components/BackButton";
+import AppBackButton from "../../components/AppBackButton";
 import { TRANSACTIONS } from "../../constant/data";
 import useAmount from "../../hooks/useAmount";
 import TransactionIcon from "./TransactionIcon";
@@ -17,7 +17,7 @@ const TransactionScreen = () => {
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
-      <BackButton />
+      <AppBackButton />
       <View style={styles.top}>
         <View style={styles.row}>
           <View style={styles.topLeft}>

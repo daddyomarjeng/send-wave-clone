@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 const ContactItem = ({ item, onPress }) => {
   // console.log(item.phoneNumbers[0].number);
+
   return (
     <>
       <TouchableOpacity
