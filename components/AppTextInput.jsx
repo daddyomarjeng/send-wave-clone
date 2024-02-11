@@ -6,17 +6,18 @@ const AppTextInput = ({
   onBlur,
   onFocus,
   label,
+  error,
   onChangeText,
   value,
+  blurColor = "#ccc",
+  focusColor = COLORS.primary,
+  errorColor = "red",
   ...rest
 }) => {
-  const [inputBorderColor, setInputBorderColor] = useState("#ccc");
+  const [inputBorderColor, setInputBorderColor] = useState(blurColor);
   const [showLabelToTop, setshowLabelToTop] = useState(false);
   const inputRef = useRef(null);
 
-  console.log("====================================");
-  console.log(value);
-  console.log("====================================");
   const handleChange = (text) => {
     if (onChangeText) {
       onChangeText(text);
@@ -24,18 +25,29 @@ const AppTextInput = ({
   };
 
   const handleBlur = () => {
-    setInputBorderColor("#ccc");
+    setInputBorderColor(blurColor);
     if (onBlur) {
       onBlur();
     }
   };
   const handleFocus = () => {
-    setInputBorderColor(COLORS.primary);
+    setInputBorderColor(focusColor);
     if (onFocus) {
       onFocus();
     }
   };
 
+  useEffect(() => {
+    if (error) {
+      setInputBorderColor(errorColor);
+    } else {
+      if (inputRef?.current?.isFocused()) {
+        setInputBorderColor(focusColor);
+      } else {
+        setInputBorderColor(blurColor);
+      }
+    }
+  }, [error]);
   useEffect(() => {
     if (inputRef?.current?.isFocused() || value?.length > 0) {
       setshowLabelToTop(true);
@@ -50,10 +62,12 @@ const AppTextInput = ({
           style={[
             styles.label,
             {
-              //   top: inputRef?.current?.isFocused() ? 0 : 25,
-              //   color: inputRef?.current?.isFocused() ? COLORS.primary : "#ccc",
               top: showLabelToTop ? 0 : 25,
-              color: showLabelToTop ? COLORS.primary : "#888",
+              color: error
+                ? errorColor
+                : showLabelToTop
+                ? focusColor
+                : blurColor,
               fontSize: showLabelToTop ? 12 : 16,
             },
           ]}
@@ -75,6 +89,10 @@ const AppTextInput = ({
         value={value}
         {...rest}
       />
+
+      {error && (
+        <Text style={[styles.error, { color: errorColor }]}>{error}</Text>
+      )}
     </View>
   );
 };
@@ -98,4 +116,5 @@ const styles = StyleSheet.create({
   label: {
     position: "absolute",
   },
+  error: {},
 });
