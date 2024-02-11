@@ -1,15 +1,23 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { COLORS } from "../constant/colors";
 
-const AppTextInput = ({ onBlur, onFocus, label, onChangeText, ...rest }) => {
-  const [inputBorderColor, setInputBorderColor] = useState("#111");
-  const [value, setValue] = useState("");
+const AppTextInput = ({
+  onBlur,
+  onFocus,
+  label,
+  onChangeText,
+  value,
+  ...rest
+}) => {
+  const [inputBorderColor, setInputBorderColor] = useState("#ccc");
+  const [showLabelToTop, setshowLabelToTop] = useState(false);
   const inputRef = useRef(null);
-  const showLabelToTop = inputRef?.current?.isFocused() || value?.length > 0;
 
+  console.log("====================================");
+  console.log(value);
+  console.log("====================================");
   const handleChange = (text) => {
-    setValue(text);
     if (onChangeText) {
       onChangeText(text);
     }
@@ -27,6 +35,14 @@ const AppTextInput = ({ onBlur, onFocus, label, onChangeText, ...rest }) => {
       onFocus();
     }
   };
+
+  useEffect(() => {
+    if (inputRef?.current?.isFocused() || value?.length > 0) {
+      setshowLabelToTop(true);
+    } else {
+      setshowLabelToTop(false);
+    }
+  }, [inputRef?.current?.isFocused(), value]);
   return (
     <View style={styles.inputContainer}>
       {label && (
@@ -38,6 +54,7 @@ const AppTextInput = ({ onBlur, onFocus, label, onChangeText, ...rest }) => {
               //   color: inputRef?.current?.isFocused() ? COLORS.primary : "#ccc",
               top: showLabelToTop ? 0 : 25,
               color: showLabelToTop ? COLORS.primary : "#888",
+              fontSize: showLabelToTop ? 12 : 16,
             },
           ]}
         >
@@ -55,6 +72,7 @@ const AppTextInput = ({ onBlur, onFocus, label, onChangeText, ...rest }) => {
         onBlur={handleBlur}
         onFocus={handleFocus}
         onChangeText={handleChange}
+        value={value}
         {...rest}
       />
     </View>
@@ -65,17 +83,17 @@ export default AppTextInput;
 
 const styles = StyleSheet.create({
   inputContainer: {
-    width: "90%",
+    width: "100%",
     maxWidth: 380,
     alignSelf: "center",
-    marginVertical: 10,
+    // marginVertical: 5,
   },
   input: {
     paddingTop: 25,
     paddingBottom: 1,
     // backgroundColor: "#fff",
     marginBottom: 10,
-    borderBottomWidth: 1.5,
+    borderBottomWidth: 1.2,
   },
   label: {
     position: "absolute",
