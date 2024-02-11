@@ -17,6 +17,7 @@ const SendMoneyAmountScreen = () => {
     sendAmount: null,
     receiveAmount: null,
   });
+  const [amountIsValid, setAmountIsValid] = useState(false);
 
   const handleChange = (field, text) => {
     if (text[text.length - 1] === ".") return; // to avoid decimals
@@ -55,7 +56,17 @@ const SendMoneyAmountScreen = () => {
       setErrorMessage((prev) => ({ ...prev, [field]: null }));
     }
   };
-  //   useEffect(() => {}, []);
+  useEffect(() => {
+    if (
+      !errorMessage?.receiveAmount &&
+      !errorMessage?.sendAmount &&
+      sendAmount >= 10
+    ) {
+      setAmountIsValid(true);
+    } else {
+      setAmountIsValid(false);
+    }
+  }, [errorMessage, sendAmount]);
   return (
     <SendMoneyLayout>
       <View style={styles.toContainer}>
@@ -78,7 +89,7 @@ const SendMoneyAmountScreen = () => {
         error={errorMessage?.receiveAmount}
       />
       <View style={styles.bottom}>
-        <AppButton title="Send" disabled />
+        <AppButton title="Send" disabled={!amountIsValid} />
       </View>
     </SendMoneyLayout>
   );
