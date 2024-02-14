@@ -22,7 +22,6 @@ const SendMoneyScreen = () => {
   const contacts = useContacts();
   const [search, setSearch] = useState("");
   const [filteredContacts, setFilteredContacts] = useState([]);
-  const [showModal, setShowModal] = useState([]);
   const searchInput = useRef(null);
   const [inputBorderColor, setInputBorderColor] = useState("#111");
   const navigation = useNavigation();
@@ -91,7 +90,7 @@ const SendMoneyScreen = () => {
           itemHeight={60}
           keyExtractor={(item) => item.id.toString()}
           renderHeader={() => (
-            <TouchableOpacity onPress={() => setShowModal(true)}>
+            <TouchableOpacity onPress={() => navigation.navigate("NewNumber")}>
               <View style={styles.row}>
                 <View style={styles.addButton}>
                   <MaterialCommunityIcons name="plus" size={36} color="#FFF" />

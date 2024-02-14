@@ -16,15 +16,15 @@ import { useFocusEffect } from "@react-navigation/native";
 import { COUNTRIES } from "../constant/data";
 import { COLORS } from "../constant/colors";
 import Numpad from "./Numpad";
+import AppCountryPicker from "./AppCountryPicker";
 
 const PhoneInput = ({ phone, setPhone }) => {
   const [showBlinker, setShowBlinker] = useState(true);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
 
   const handleCountrySelect = (country) => {
-    setSelectedCountry(country);
-    setShowModal(false);
+    console.log("====================================");
+    console.log(country);
+    console.log("====================================");
   };
 
   // useEffect(() => {
@@ -63,14 +63,7 @@ const PhoneInput = ({ phone, setPhone }) => {
   return (
     <View style={styles.container}>
       <View style={styles.top}>
-        <TouchableOpacity
-          style={styles.left}
-          onPress={() => setShowModal(true)}
-        >
-          <Image source={selectedCountry.flag} style={styles.image} />
-          <Text style={styles.text}>{selectedCountry.countryCode}</Text>
-          <Ionicons name="chevron-down" size={20} />
-        </TouchableOpacity>
+        <AppCountryPicker onSelect={handleCountrySelect} />
         <View style={styles.right}>
           <Text
             style={[styles.text, { color: phone ? "#111" : "#ccc" }]}
@@ -82,56 +75,6 @@ const PhoneInput = ({ phone, setPhone }) => {
         </View>
       </View>
       <Numpad number={phone} setNumber={setPhone} showOtpInputs={false} />
-
-      <Modal transparent visible={showModal}>
-        <TouchableWithoutFeedback onPress={() => setShowModal(false)}>
-          <View style={styles.modalOverlay}>
-            <View style={styles.modalContent}>
-              <Text style={styles.h1}>Selcet Country</Text>
-              {COUNTRIES.map((country) => (
-                <TouchableOpacity
-                  style={[styles.row, { paddingVertical: 15 }]}
-                  key={country.id}
-                  onPress={() => handleCountrySelect(country)}
-                >
-                  <View style={styles.row}>
-                    <Image style={styles.image} source={country.flag} />
-                    <Text style={styles.modalText}>
-                      {country.name}
-                      <Text style={[styles.modalTextSmall]}>
-                        {country.countryCode}
-                      </Text>
-                    </Text>
-                  </View>
-                  <View
-                    style={[
-                      styles.radio,
-                      {
-                        borderColor:
-                          selectedCountry.id === country.id
-                            ? COLORS.primary
-                            : "#111",
-                      },
-                    ]}
-                  >
-                    <View
-                      style={{
-                        height: 12,
-                        width: 12,
-                        borderRadius: 10,
-                        backgroundColor:
-                          selectedCountry.id === country.id
-                            ? COLORS.primary
-                            : "transparent",
-                      }}
-                    />
-                  </View>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
     </View>
   );
 };
@@ -144,7 +87,7 @@ const styles = StyleSheet.create({
   },
   top: {
     flexDirection: "row",
-    alignItems: "flex-end",
+    alignItems: "center",
     gap: 10,
     marginVertical: 20,
   },

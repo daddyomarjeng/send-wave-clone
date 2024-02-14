@@ -21,6 +21,6 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 20,
     // backgroundColor: "red",
-    width: 100,
+    width: 40,
   },
 });

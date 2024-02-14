@@ -8,6 +8,7 @@ import PinScreen from "../screens/auth/PinScreen";
 import TransactionScreen from "../screens/transaction";
 import SendMoneyScreen from "../screens/send";
 import SendMoneyAmountScreen from "../screens/send/SendMoneyAmount";
+import NewNumberScreen from "../screens/send/NewNumber";
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ const AppStack = () => {
       {/* Send Money */}
       <Stack.Screen name="Send" component={SendMoneyScreen} />
       <Stack.Screen name="SendAmount" component={SendMoneyAmountScreen} />
+      <Stack.Screen name="NewNumber" component={NewNumberScreen} />
     </Stack.Navigator>
   );
 };

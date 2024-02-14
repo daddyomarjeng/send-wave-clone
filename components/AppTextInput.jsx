@@ -12,6 +12,7 @@ const AppTextInput = ({
   blurColor = "#ccc",
   focusColor = COLORS.primary,
   errorColor = "red",
+  style = {},
   ...rest
 }) => {
   const [inputBorderColor, setInputBorderColor] = useState(blurColor);
@@ -56,7 +57,7 @@ const AppTextInput = ({
     }
   }, [inputRef?.current?.isFocused(), value]);
   return (
-    <View style={styles.inputContainer}>
+    <View style={[styles.inputContainer, style]}>
       {label && (
         <Text
           style={[
