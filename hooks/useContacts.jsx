@@ -17,18 +17,15 @@ export default function useContacts() {
           //   name: "",
         });
         if (data.length > 0) {
-          data;
           setContacts(data);
           // const contact = data[0];
           // console.log(contact);
           //   data[].
+        } else {
+          setContacts([]);
         }
       }
     })();
-
-    return () => {
-      setContacts([]);
-    };
   }, []);
   return contacts;
 }

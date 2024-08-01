@@ -46,12 +46,25 @@ const SendMoneyScreen = () => {
     navigation.navigate("SendAmount", { receiver });
   };
   useEffect(() => {
+    console.log("====================================");
+    console.log(contacts, "1");
+    console.log("====================================");
     if (!contacts) return;
+    console.log("====================================");
+    console.log(contacts, "2");
+    console.log("====================================");
     setFilteredContacts(contacts);
+    console.log("====================================");
+    console.log(contacts, "3");
+    console.log("====================================");
     return () => {
       setFilteredContacts([]);
     };
   }, [contacts]);
+
+  const renderItem = useCallback(({ item }) =>
+    !item.phoneNumbers ? null : <ContactItem item={item} onPress={handleContactSelect} />
+  );
 
   return (
     // <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -82,11 +95,7 @@ const SendMoneyScreen = () => {
         <BigList
           data={filteredContacts}
           ListEmptyComponent={() => <Text>No Contacts found...</Text>}
-          renderItem={({ item, index }) =>
-            !item.phoneNumbers ? null : (
-              <ContactItem item={item} onPress={handleContactSelect} />
-            )
-          }
+          renderItem={renderItem}
           itemHeight={60}
           keyExtractor={(item) => item.id.toString()}
           renderHeader={() => (
