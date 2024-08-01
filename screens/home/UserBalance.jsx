@@ -11,7 +11,7 @@ const UserBalance = () => {
         <>
           <Text style={styles.balance}>0 GMD</Text>
           <Ionicons
-            name="md-eye-off"
+            name="eye-off"
             size={28}
             color="#FFF"
             onPress={() => setShowBalance(!showBalance)}
@@ -21,7 +21,7 @@ const UserBalance = () => {
         <>
           <Text style={styles.balance}>XXXXX GMD</Text>
           <Ionicons
-            name="md-eye"
+            name="eye"
             size={28}
             color="#FFF"
             onPress={() => setShowBalance(!showBalance)}

@@ -3,14 +3,7 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 
 const SettingsButton = () => {
-  return (
-    <Ionicons
-      name="md-settings-sharp"
-      size={32}
-      color="#FFF"
-      style={styles.icon}
-    />
-  );
+  return <Ionicons name="settings-sharp" size={32} color="#FFF" style={styles.icon} />;
 };
 
 export default SettingsButton;
