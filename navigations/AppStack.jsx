@@ -18,6 +18,7 @@ const AppStack = () => {
       screenOptions={{ headerShown: false, animation: "slide_from_right" }}
       // initialRouteName="Send"
     >
+      <Stack.Screen name="Send" component={SendMoneyScreen} />
       {/* Auth */}
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="OTP" component={OtpScreen} />
@@ -31,7 +32,7 @@ const AppStack = () => {
       <Stack.Screen name="Transaction" component={TransactionScreen} />
 
       {/* Send Money */}
-      <Stack.Screen name="Send" component={SendMoneyScreen} />
+      {/* <Stack.Screen name="Send" component={SendMoneyScreen} /> */}
       <Stack.Screen name="SendAmount" component={SendMoneyAmountScreen} />
       <Stack.Screen name="NewNumber" component={NewNumberScreen} />
     </Stack.Navigator>
